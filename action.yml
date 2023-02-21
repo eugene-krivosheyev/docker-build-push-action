@@ -38,7 +38,7 @@ runs:
           org.opencontainers.image.revision=${{ github.sha }}
           org.opencontainers.image.title=${{ github.repository }}
         tags: |
-          type=raw,value=${{ env.module_version }}
+          type=raw,value=${{ inputs.module_version }}
           type=pep440,pattern={{version}}
           type=pep440,pattern={{major}}.{{minor}}
           type=pep440,pattern={{major}}
