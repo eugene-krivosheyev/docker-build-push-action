@@ -59,7 +59,7 @@ runs:
 
     - uses: snok/container-retention-policy@v2
       with:
-        image-names: "${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}*"
+        image-names: "${{ github.repository }}/${{ inputs.module }}*"
         cut-off: one minute ago UTC
         keep-at-least: 3
         skip-tags: latest
