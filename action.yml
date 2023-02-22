@@ -27,20 +27,6 @@ runs:
 
     - uses: docker/setup-buildx-action@v2
 
-    - id: meta
-      uses: docker/metadata-action@v4
-      with:
-        images: ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}
-        labels: |
-          org.opencontainers.image.version=${{ inputs.module_version }}
-          org.opencontainers.image.revision=${{ github.sha }}
-          org.opencontainers.image.title=${{ github.repository }}
-        tags: |
-          type=raw,value=${{ inputs.module_version }}
-          type=pep440,pattern={{version}}
-          type=pep440,pattern={{major}}.{{minor}}
-          type=pep440,pattern={{major}}
-
     - uses: docker/login-action@v2
       with:
         registry: ${{ inputs.registry }}
@@ -52,8 +38,12 @@ runs:
         context: ${{ inputs.module }}
         platforms: linux/amd64,linux/arm64
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ inputs.module_version }}
+        labels: |
+          org.opencontainers.image.title=${{ github.repository }}/${{ inputs.module }}
+          org.opencontainers.image.version=${{ inputs.module_version }}
+          org.opencontainers.image.revision=${{ github.sha }}
+          org.opencontainers.image.url=${{ inputs.registry }}/${{ github.repository }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
