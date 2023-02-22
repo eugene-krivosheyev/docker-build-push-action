@@ -38,7 +38,10 @@ runs:
         context: ${{ inputs.module }}
         platforms: linux/amd64,linux/arm64
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}:${{ inputs.module_version }}
+        tags: |
+          ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}:${{ inputs.module_version }}
+          ${{ inputs.module }}:${{ inputs.module_version }}
+          ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}:latest
         labels: |
           org.opencontainers.image.title=${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}
           org.opencontainers.image.version=${{ inputs.module_version }}
