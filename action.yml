@@ -40,10 +40,9 @@ runs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: |
           ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}:${{ inputs.module_version }}
-          ${{ inputs.registry }}/${{ github.actor }}/${{ github.repository }}/${{ inputs.module }}:${{ inputs.module_version }}
           ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}:latest
         labels: |
-          org.opencontainers.image.title=${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}
+          org.opencontainers.image.ref.name=${{ github.repository }}/${{ inputs.module }}
           org.opencontainers.image.version=${{ inputs.module_version }}
           org.opencontainers.image.revision=${{ github.sha }}
           org.opencontainers.image.url=${{ inputs.registry }}/${{ github.repository }}
