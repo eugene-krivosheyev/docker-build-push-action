@@ -42,6 +42,7 @@ runs:
           ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}:${{ inputs.module_version }}
           ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.module }}:latest
         labels: |
+          org.opencontainers.image.title=${{ github.repository }}/${{ inputs.module }}
           org.opencontainers.image.ref.name=${{ github.repository }}/${{ inputs.module }}
           org.opencontainers.image.version=${{ inputs.module_version }}
           org.opencontainers.image.revision=${{ github.sha }}
