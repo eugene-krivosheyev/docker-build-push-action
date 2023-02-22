@@ -1,4 +1,4 @@
-name: docker-build-push
+name: docker-build-push-action
 description: Build and push Docker image.
 
 inputs:
@@ -49,7 +49,8 @@ runs:
 
     - uses: snok/container-retention-policy@v2
       with:
-        image-names: "${{ github.repository }}/${{ inputs.module }}*"
+        image-names: "${{ inputs.module }}"
+        untagged-only: false
         cut-off: one minute ago UTC
         keep-at-least: 3
         skip-tags: latest
